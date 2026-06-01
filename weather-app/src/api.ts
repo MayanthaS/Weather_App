@@ -1,3 +1,5 @@
+import {weatherSchema} from "./schemas/weatherSchema"
+
 const API_KEY = import.meta.env.VITE_API_KEY
 
 export async function getWeather({ lat, lon }: { lat: number; lon: number }) {
@@ -5,10 +7,7 @@ export async function getWeather({ lat, lon }: { lat: number; lon: number }) {
     `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=imperial&hourly&daily&lang=en&appid=${API_KEY}`,
   )
   const data = await res.json()
+  return weatherSchema.parse(data)
 
-  if (!res.ok) {
-    throw new Error(data.message ?? `Weather request failed: ${res.status}`)
-  }
-
-  return data
+ 
 }
