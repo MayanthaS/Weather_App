@@ -1,9 +1,13 @@
-import React from 'react'
+import React ,{type ReactNode}from 'react'
 
-type Props = {}
+type Props = {
+  children:ReactNode
+}
 
-export default function card({}: Props) {
+export default function card({children}: Props) {
   return (
-    <div>card</div>
+    <div>
+        <div>{children}</div>
+    </div>
   )
 }
